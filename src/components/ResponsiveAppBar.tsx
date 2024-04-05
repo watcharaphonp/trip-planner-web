@@ -17,7 +17,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import profileImg from "@assets/images/profile.png";
 import { useRouter } from "next/navigation";
 
-const pages = ["chat-page", "chat-bot"];
+const pages: any[] = [];
 const settings = ["Account", "Logout", "CreateForm", "Chat", "Profile"];
 
 function ResponsiveAppBar() {
