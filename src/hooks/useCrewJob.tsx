@@ -46,7 +46,7 @@ export const useCrewJob = () => {
           result: any;
           events: EventType[];
           task_output: any;
-        }>(`http://localhost:3001/api/crew/${currentJobId}`);
+        }>(`${process.env.backendUrl}/api/crew/${currentJobId}`);
         const {
           status,
           events: fetchedEvents,
@@ -99,7 +99,7 @@ export const useCrewJob = () => {
 
     try {
       const response = await axios.post<{ job_id: string }>(
-        "http://localhost:3001/api/crew",
+        `${process.env.backendUrl}/api/crew`,
         {
           origin,
           cities: city,

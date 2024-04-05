@@ -17,7 +17,8 @@ const nextConfig = {
     env: {
       appTitle: 'Trip Planner',
       appName: 'trip-planner',
-      appDescription: 'Description here'
+      appDescription: 'Description here',
+      backendUrl: 'http://localhost:3001'
     },
 };
 
