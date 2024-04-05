@@ -1,0 +1,47 @@
+body {
+  margin: unset;
+}
+
+body > header > div {
+  max-width: unset !important;
+}
+
+.max-w-sm {
+  max-width: 24rem;
+}
+
+.rounded-lg {
+  border-radius: .5rem;
+}
+.bg-blue-200 {
+  --bg-opacity: 1;
+  background-color: #bee3f8;
+  background-color: rgba(190, 227, 248, var(--bg-opacity));
+}
+
+.bg-gray-200 {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+.message-box {
+  padding: 16px;
+  margin-top: 18px;
+  font-size: 14px;
+}
