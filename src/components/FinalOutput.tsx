@@ -11,7 +11,10 @@ export const FinalOutput: React.FC<FinalOutputProps> = ({ tripPlan }) => {
       <h2 className="text-lg font-semibold my-2">Final Output</h2>
       <div
         className="flex-grow overflow-auto border-2 border-gray-300 p-2"
-        style={{ border: `${tripPlan ? "1px solid grey" : ""}` }}
+        style={{
+          border: "1px solid grey",
+          height: `${tripPlan ? "fit-content" : "100px"}`,
+        }}
       >
         {tripPlan ? (
           tripPlan.map((output, index) => {
@@ -22,7 +25,7 @@ export const FinalOutput: React.FC<FinalOutputProps> = ({ tripPlan }) => {
             );
           })
         ) : (
-          <div className="p-2 border-b border-gray-200">No result yet</div>
+          <div className="p-2 border-b border-gray-200">No result yet.</div>
         )}
       </div>
     </div>
