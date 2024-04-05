@@ -1,4 +1,8 @@
 import path from 'path';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -15,10 +19,10 @@ const nextConfig = {
       return config
     },
     env: {
-      appTitle: 'Trip Planner',
-      appName: 'trip-planner',
-      appDescription: 'Description here',
-      backendUrl: 'https://4555-2405-9800-b920-46c6-9465-e3e3-e66-d1bf.ngrok-free.app'
+      appTitle: process.env.APP_TITLE,
+      appName: process.env.APP_NAME,
+      appDescription: process.env.APP_DESCRIPTION,
+      backendUrl: process.env.BACKEND_URL
     },
 };
 
