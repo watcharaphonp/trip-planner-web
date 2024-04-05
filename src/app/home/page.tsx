@@ -55,10 +55,10 @@ export default function HomePage() {
           </Grid>
           <Grid item xs={6}>
             <Grid container>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <h2 className="text-2xl font-bold">Create Trip Plan</h2>
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={8}>
                 <Button
                   style={{ height: "35px", top: "16px" }}
                   component="label"
