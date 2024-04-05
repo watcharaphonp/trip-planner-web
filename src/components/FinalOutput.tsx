@@ -13,10 +13,10 @@ export const FinalOutput: React.FC<FinalOutputProps> = ({ tripPlan }) => {
         className="flex-grow overflow-auto border-2 border-gray-300 p-2"
         style={{
           border: "1px solid grey",
-          height: `${tripPlan ? "fit-content" : "100px"}`,
+          height: `${tripPlan.length ? "fit-content" : "100px"}`,
         }}
       >
-        {tripPlan ? (
+        {tripPlan.length ? (
           tripPlan.map((output, index) => {
             return (
               <div key={index} className="p-2 border-b border-gray-200">
