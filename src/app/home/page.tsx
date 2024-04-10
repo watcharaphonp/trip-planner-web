@@ -30,25 +30,25 @@ export default function HomePage() {
           <Grid item xs={6}>
             <InputSection
               title="Origin"
-              placeholder="Add your origin"
+              placeholder="From where will you be traveling from?"
               data={crewJob.origin}
               setData={crewJob.setOrigin}
             />
             <InputSection
               title="Destination city"
-              placeholder="Add your destination city"
+              placeholder="What are the cities options you are interested in visiting?"
               data={crewJob.city}
               setData={crewJob.setCity}
             />
             <InputSection
               title="Interest"
-              placeholder="Add your interest about the city"
+              placeholder="What are some of your high level interests and hobbies?"
               data={crewJob.interest}
               setData={crewJob.setInterest}
             />
             <InputSection
               title="Travel Date"
-              placeholder="Travel date Ex. 24 Jan 2024 to 30 Jan 2024"
+              placeholder="What is the date range you are interested in traveling? (Ex. 24 Jan 2024 to 30 Jan 2024)"
               data={crewJob.travelDateRange}
               setData={crewJob.setTravelDateRange}
             />
