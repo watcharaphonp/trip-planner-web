@@ -1,8 +1,11 @@
 "use client";
 
+import { Task } from "@/configs/constant";
+import { userInfoState } from "@/reduxs/user/slice";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export type EventType = {
   data: string;
@@ -33,10 +36,14 @@ export const useCrewJob = () => {
   const [tripPlan, setTripPlan] = useState<any>();
   const [currentJobId, setCurrentJobId] = useState<string>("");
 
+  const {
+    user: { info: userInfo },
+  } = useSelector(userInfoState);
+
   // useEffects
   useEffect(() => {
     let intervalId: number;
-    console.log("currentJobId", currentJobId);
+    if (currentJobId) console.log("currentJobId", currentJobId);
 
     const fetchJobStatus = async () => {
       try {
@@ -47,17 +54,15 @@ export const useCrewJob = () => {
           events: EventType[];
           task_output: any;
         }>(`${process.env.backendUrl}/api/crew/${currentJobId}`);
-        const {
-          status,
-          events: fetchedEvents,
-          result,
-          task_output,
-        } = response.data;
+        const { status, events, result, task_output } = response.data;
 
-        console.log("status update", response.data);
+        if (response.data) console.log("status update", response.data);
 
-        setEvents(fetchedEvents);
-        setTripPlan(task_output);
+        setEvents(events);
+
+        if (events && events[events.length - 1].data.includes(Task.Plan))
+          setTripPlan(task_output);
+
         if (result) {
           console.log("setting job result", result);
           console.log(task_output);
@@ -101,6 +106,7 @@ export const useCrewJob = () => {
       const response = await axios.post<{ job_id: string }>(
         `${process.env.backendUrl}/api/crew`,
         {
+          user_id: userInfo.userId,
           origin,
           cities: city,
           interests: interest,

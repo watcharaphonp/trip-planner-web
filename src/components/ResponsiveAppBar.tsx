@@ -16,18 +16,41 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import profileImg from "@assets/images/profile.png";
 import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { login, logout, userInfoState } from "@/reduxs/user/slice";
 
 const pages: any[] = [];
 const settings = ["Account", "Logout", "CreateForm", "Chat", "Profile"];
 
 function ResponsiveAppBar() {
   const router = useRouter();
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const dispatch = useDispatch();
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const {
+    user: { info: userInfo },
+  } = useSelector(userInfoState);
+
+  useEffect(() => {
+    console.log(userInfo.userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo.userId]);
+
+  useEffect(() => {
+    const userId = uuidv4();
+
+    if (!userInfo.userId) {
+      dispatch(
+        login({
+          userId,
+          loggedIn: true,
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo.userId !== undefined]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);

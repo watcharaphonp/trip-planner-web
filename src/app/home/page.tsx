@@ -64,7 +64,7 @@ export default function HomePage() {
                   component="label"
                   variant="contained"
                   tabIndex={-1}
-                  // startIcon={<KeyboardDoubleArrowRightIcon />}
+                  startIcon={<KeyboardDoubleArrowRightIcon />}
                   onClick={() => crewJob.startJob()}
                   disabled={crewJob.running}
                 >
