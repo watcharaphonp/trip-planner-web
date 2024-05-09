@@ -10,6 +10,20 @@ function MarkdownListItem(props: any) {
   return <Box component="li" sx={{ mt: 1, typography: "body1" }} {...props} />;
 }
 
+const CustomImage = ({ children, ...props }: { children: any; props: any }) => {
+  const handleError = (event: any) => {
+    event.target.style.display = "none";
+  };
+
+  return (
+    <>
+      <br />
+      <img {...props} onError={handleError} />
+      <br />
+    </>
+  );
+};
+
 const options = {
   overrides: {
     h1: {
@@ -18,15 +32,25 @@ const options = {
         gutterBottom: true,
         variant: "h4",
         component: "h1",
+        className: "markdown-text",
       },
     },
     h2: {
       component: Typography,
-      props: { gutterBottom: true, variant: "h6", component: "h2" },
+      props: {
+        gutterBottom: true,
+        variant: "h6",
+        component: "h2",
+        className: "markdown-text",
+      },
     },
     h3: {
       component: Typography,
-      props: { gutterBottom: true, variant: "subtitle1" },
+      props: {
+        gutterBottom: true,
+        variant: "subtitle1",
+        className: "markdown-text",
+      },
     },
     h4: {
       component: Typography,
@@ -34,15 +58,30 @@ const options = {
         gutterBottom: true,
         variant: "caption",
         paragraph: true,
+        className: "markdown-text",
       },
     },
     p: {
       component: Typography,
-      props: { paragraph: true },
+      props: { paragraph: true, className: "markdown-text" },
     },
-    a: { component: Link },
+    a: {
+      component: Link,
+      props: {
+        className: "markdown-text",
+      },
+    },
     li: {
       component: MarkdownListItem,
+      props: {
+        className: "markdown-text",
+      },
+    },
+    img: {
+      props: {
+        className: "markdown-img",
+      },
+      component: CustomImage,
     },
   },
 };

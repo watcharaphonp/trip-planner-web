@@ -22,9 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AppRouterCacheProvider options={{ key: "css", enableCssLayer: true }}>
-          <StoreProvider>
-            <ThemeProvider theme={theme}>{children} </ThemeProvider>
-          </StoreProvider>
+          <ThemeProvider theme={theme}>
+            <StoreProvider>{children} </StoreProvider>
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

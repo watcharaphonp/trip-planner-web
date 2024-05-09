@@ -22,7 +22,10 @@ const nextConfig = {
       appTitle: process.env.APP_TITLE,
       appName: process.env.APP_NAME,
       appDescription: process.env.APP_DESCRIPTION,
-      backendUrl: process.env.BACKEND_URL
+      backendUrl: process.env.BACKEND_URL,
+      langfusePublicKey: process.env.LANGFUSE_PUBLIC_KEY,
+      langfuseSecretKey: process.env.LANGFUSE_SECRET_KEY,
+      langfuseHost: process.env.LANGFUSE_HOST
     },
 };
 

@@ -11,7 +11,7 @@ body > header > div {
 }
 
 .rounded-lg {
-  border-radius: .5rem;
+  border-radius: 8px;
 }
 .bg-blue-200 {
   --bg-opacity: 1;
@@ -20,9 +20,7 @@ body > header > div {
 }
 
 .bg-gray-200 {
-  --bg-opacity: 1;
-  background-color: #edf2f7;
-  background-color: rgba(237, 242, 247, var(--bg-opacity));
+  background-color: #dcdbdb;
 }
 
 .flex {
@@ -44,4 +42,14 @@ body > header > div {
   padding: 16px;
   margin-top: 18px;
   font-size: 14px;
+}
+
+.output-log-container {
+  padding: 0px 8px;
+}
+
+.markdown-img {
+  width: 50%;
+  height: 20%;
+  padding-left: 20%;
 }

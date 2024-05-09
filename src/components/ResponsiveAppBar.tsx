@@ -22,7 +22,6 @@ import { useEffect, useState } from "react";
 import { login, logout, userInfoState } from "@/reduxs/user/slice";
 
 const pages: any[] = [];
-const settings = ["Account", "Logout", "CreateForm", "Chat", "Profile"];
 
 function ResponsiveAppBar() {
   const router = useRouter();
@@ -33,24 +32,40 @@ function ResponsiveAppBar() {
     user: { info: userInfo },
   } = useSelector(userInfoState);
 
+  const settings = [
+    { name: "Account", display: true },
+    {
+      name: "Login",
+      handler: (e: any) => {
+        e.preventDefault();
+        const userId = uuidv4();
+
+        dispatch(
+          login({
+            userId,
+            loggedIn: true,
+          })
+        );
+      },
+      display: userInfo.userId === "",
+    },
+    {
+      name: "Logout",
+      handler: (e: any) => {
+        e.preventDefault();
+        dispatch(logout());
+      },
+      display: userInfo.userId !== "",
+    },
+    { name: "CreateForm", display: true },
+    { name: "Chat", display: true },
+    { name: "Profile", display: true },
+  ];
+
   useEffect(() => {
     console.log(userInfo.userId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userInfo.userId]);
-
-  useEffect(() => {
-    const userId = uuidv4();
-
-    if (!userInfo.userId) {
-      dispatch(
-        login({
-          userId,
-          loggedIn: true,
-        })
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userInfo.userId !== undefined]);
+  }, [userInfo.userId !== ""]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -144,7 +159,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            {process.env.appTitle}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -162,7 +177,7 @@ function ResponsiveAppBar() {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
-                  src={profileImg.src}
+                  src={userInfo.userId !== "" ? profileImg.src : undefined}
                   style={{ background: "#fff", border: "2px solid #000" }}
                 />
               </IconButton>
@@ -184,8 +199,12 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={setting.name}
+                  onClick={setting?.handler ?? handleCloseUserMenu}
+                  style={{ display: `${!setting.display ? "none" : ""}` }}
+                >
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

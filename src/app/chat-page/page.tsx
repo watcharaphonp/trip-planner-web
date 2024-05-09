@@ -1,7 +1,7 @@
 "use client";
 
 import { EventLog } from "@/components/EventLog";
-import { FinalOutput } from "@/components/FinalOutput";
+import { OutputLog } from "@/components/OutputLog";
 import { useCrewJob } from "@/hooks/useCrewJob";
 import MessageBox from "@/components/MessageBox";
 import Page from "@/components/Page";

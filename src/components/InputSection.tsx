@@ -1,13 +1,16 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { TextField, Button, Grid } from "@mui/material";
 
 type InputSectionProps = {
   title: string;
   placeholder: string;
-  data: string[];
-  setData: Dispatch<SetStateAction<string[]>>;
+  data: string;
+  setData: Dispatch<SetStateAction<string>>;
+  required?: boolean;
+  disabled?: boolean;
+  isSubmit?: boolean;
 };
 
 export default function InputSection({
@@ -15,66 +18,41 @@ export default function InputSection({
   placeholder,
   setData,
   data,
+  required = false,
+  disabled = false,
+  isSubmit = false,
 }: InputSectionProps) {
-  const [inputValue, setInputValue] = useState<string>("");
+  const [isShowError, setIsShowError] = useState<boolean>(false);
 
-  const handleAddClick = () => {
-    if (inputValue.trim() !== "") {
-      setData((prevItems) => [...prevItems, inputValue]);
-      setInputValue("");
-    }
-  };
-
-  const handleRemoveItem = (index: number) => {
-    setData(data.filter((_, i) => i !== index));
-  };
+  useEffect(() => {
+    setIsShowError(isSubmit && data.trim() === "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSubmit]);
 
   return (
     <div className="mb-4">
       <h2 className="text-xl font-bold">{title}</h2>
       <div className="flex items-center mt-2">
         <Grid container>
-          <Grid item xs={8}>
+          <Grid item xs={12}>
             <TextField
-              id={title}
+              id={`${required ? "outlined-required" : ""} ${
+                disabled ? "outlined-disabled" : ""
+              }`}
               name={title}
-              label=""
+              label={placeholder}
               fullWidth
-              variant="outlined"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              variant="standard"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
               placeholder={placeholder}
+              required={required}
+              error={isShowError}
+              helperText={isShowError ? `${title} is empty` : ""}
             />
-          </Grid>
-          <Grid item xs={4}>
-            <Button
-              style={{ height: "35px", top: "8px", left: "16px" }}
-              onClick={handleAddClick}
-              // className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              component="label"
-              variant="contained"
-            >
-              Add
-            </Button>
           </Grid>
         </Grid>
       </div>
-      <ul className="mt-2">
-        {data.map((item, index) => (
-          <li
-            key={index}
-            className="flex items-center justify-between p-2 border-b border-gray-300"
-          >
-            <span>{item}</span>
-            <button
-              onClick={() => handleRemoveItem(index)}
-              className="text-red-500 hover:text-red-700"
-            >
-              X
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
