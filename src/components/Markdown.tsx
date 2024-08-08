@@ -5,20 +5,29 @@ import ReactMarkdown from "markdown-to-jsx";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
+import Image from "next/image";
 
 function MarkdownListItem(props: any) {
   return <Box component="li" sx={{ mt: 1, typography: "body1" }} {...props} />;
 }
 
-const CustomImage = ({ children, ...props }: { children: any; props: any }) => {
+const CustomImage = ({ children, props }: { children: any; props: any }) => {
   const handleError = (event: any) => {
     event.target.style.display = "none";
   };
 
+  const { src, alt } = props;
+
   return (
     <>
       <br />
-      <img {...props} onError={handleError} />
+      <Image
+        src={src}
+        alt={alt}
+        width={400}
+        height={200}
+        onError={handleError}
+      />
       <br />
     </>
   );

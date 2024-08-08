@@ -20,7 +20,11 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@assets/*": ["./public/assets/*"]
+      "@assets/*": ["./public/assets/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@configs/*": ["./src/configs/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@providers/*": ["./src/providers/*"]
     },
     "baseUrl": "."
   },

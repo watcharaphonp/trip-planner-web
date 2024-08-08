@@ -1,12 +1,12 @@
 "use client";
 
 import { Task } from "@/configs/constant";
-import { userInfoState } from "@/reduxs/user/slice";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { RootState } from "@/stores/rootReducer";
 
 export type EventType = {
   data: string;
@@ -81,9 +81,7 @@ export const useCrewJob = () => {
     }
   };
 
-  const {
-    user: { info: userInfo },
-  } = useSelector(userInfoState);
+  const userInfo = useSelector((state: RootState) => state.user.info);
 
   // useEffects
   useEffect(() => {

@@ -8,14 +8,19 @@ import Page from "@/components/Page";
 import { Grid, Button, Stack, Chip, CircularProgress } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { useEffect, useState } from "react";
-import { green } from "@mui/material/colors";
-import { Done } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+import { RootState } from "@/stores/rootReducer";
+import { useSelector } from "react-redux";
 
 export default function HomePage() {
   // Hooks
   const crewJob = useCrewJob();
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(false);
   const [isFormSubmit, setIsformSubmit] = useState<boolean>(false);
+  const language = useSelector(
+    (state: RootState) => state.localization.language
+  );
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsSubmitDisabled(
@@ -41,7 +46,7 @@ export default function HomePage() {
       <Grid container spacing={5}>
         <Grid item xs={12} md={4}>
           <InputSection
-            title="Origin"
+            title={t("Origin city")}
             placeholder="From where will you be traveling from?"
             data={crewJob.origin}
             setData={crewJob.setOrigin}
@@ -49,7 +54,7 @@ export default function HomePage() {
             isSubmit={isFormSubmit}
           />
           <InputSection
-            title="Destination city"
+            title={t("Destination city")}
             placeholder="What are the city you are interested in visiting?"
             data={crewJob.city}
             setData={crewJob.setCity}
@@ -57,7 +62,7 @@ export default function HomePage() {
             isSubmit={isFormSubmit}
           />
           <InputSection
-            title="Interest"
+            title={t("Interest")}
             placeholder="Your high level interests and hobbies?"
             data={crewJob.interest}
             setData={crewJob.setInterest}
@@ -65,7 +70,7 @@ export default function HomePage() {
             isSubmit={isFormSubmit}
           />
           <InputSection
-            title="Travel Date"
+            title={t("Travel Date")}
             placeholder="Travel Date Range (Ex. 24 Jan 2024 to 30 Jan 2024)"
             data={crewJob.travelDateRange}
             setData={crewJob.setTravelDateRange}
