@@ -8,10 +8,10 @@ import Link from "@mui/material/Link";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary">
+    <Typography variant="body2" color="text.secondary" className="footer-text">
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        {process.env.authorName}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -33,9 +33,9 @@ function StickyFooter() {
             : theme.palette.grey[800],
       }}
     >
-      <Container maxWidth="sm">
-        <Typography variant="body1">
-          My sticky footer can be found here.
+      <Container maxWidth="sm" className="footer-content-container">
+        <Typography variant="body1" className="footer-text">
+          Next.JS Template
         </Typography>
         <Copyright />
       </Container>

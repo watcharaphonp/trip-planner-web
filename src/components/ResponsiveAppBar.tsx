@@ -90,7 +90,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" color="success">
+    <AppBar position="fixed" color="success">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

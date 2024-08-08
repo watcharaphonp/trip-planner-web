@@ -19,6 +19,7 @@ const nextConfig = {
       return config
     },
     env: {
+      authorName: process.env.AUTHOR_NAME,
       appTitle: process.env.APP_TITLE,
       appName: process.env.APP_NAME,
       appDescription: process.env.APP_DESCRIPTION,

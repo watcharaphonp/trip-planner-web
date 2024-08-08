@@ -20,7 +20,7 @@ export default function Page({
     <>
       <TranslationProvider>
         {showHeader && <ResponsiveAppBar />}
-        <main className={`${styles.main} ${styles.page} ${className} page`}>
+        <main className={`page ${styles.main} ${styles.page} ${className}`}>
           {children}
         </main>
         {showFooter && <StickyFooter />}
