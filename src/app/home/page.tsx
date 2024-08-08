@@ -93,7 +93,7 @@ export default function HomePage() {
               onClick={() => crewJob.startJob()}
               disabled={crewJob.running || isSubmitDisabled}
             >
-              {crewJob.running ? "Running..." : "Start"}
+              {t(`${crewJob.running ? "Running..." : "Start"}`)}
             </Button>
           </Stack>
           <Stack direction="row" spacing={1} style={{ marginTop: "60px" }}>
@@ -116,9 +116,15 @@ export default function HomePage() {
         </Grid>
         <Grid item xs={12} md={8}>
           <Grid item xs={12}>
-            <OutputLog title="General Info" content={crewJob.generalInfo} />
-            <OutputLog title="City Guide" content={crewJob.cityGuideInfo} />
-            <OutputLog title="Itenerary" content={crewJob.iteneraryInfo} />
+            <OutputLog
+              title={t("General Info")}
+              content={crewJob.generalInfo}
+            />
+            <OutputLog
+              title={t("City Guide")}
+              content={crewJob.cityGuideInfo}
+            />
+            <OutputLog title={t("Itenerary")} content={crewJob.iteneraryInfo} />
             <EventLog events={crewJob.events} />
           </Grid>
         </Grid>
