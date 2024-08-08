@@ -19,7 +19,10 @@ import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { login, logout, userInfoState } from "@/reduxs/user/slice";
+import { login, logout } from "@/stores/user/slice";
+import { useTranslation } from "react-i18next";
+import { changeLanguage } from "@/stores/localization/slice";
+import { RootState } from "@/stores/rootReducer";
 
 const pages: any[] = [];
 
@@ -28,9 +31,18 @@ function ResponsiveAppBar() {
   const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const {
-    user: { info: userInfo },
-  } = useSelector(userInfoState);
+
+  const userInfo = useSelector((state: RootState) => state.user.info);
+
+  // Localization
+  const language = useSelector(
+    (state: RootState) => state.localization.language
+  );
+
+  const switchLanguage = (localeCode: string) => {
+    dispatch(changeLanguage(localeCode));
+  };
+  const { t } = useTranslation();
 
   const settings = [
     { name: "Account", display: true },
@@ -61,11 +73,6 @@ function ResponsiveAppBar() {
     { name: "Chat", display: true },
     { name: "Profile", display: true },
   ];
-
-  useEffect(() => {
-    console.log(userInfo.userId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userInfo.userId !== ""]);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -172,7 +179,16 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
+          <Box sx={{ flexGrow: 0 }}>
+            <Button
+              onClick={() =>
+                switchLanguage(`${language === "en" ? "th" : "en"}`)
+              }
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              {t("localeTitle")}
+            </Button>
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

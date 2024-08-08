@@ -1,5 +1,6 @@
 "use client";
 
+import TranslationProvider from "@/providers/TranslationProvider";
 import styles from "../app/page.module.css";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import StickyFooter from "./StickyFooter";
@@ -17,11 +18,13 @@ export default function Page({
 }>) {
   return (
     <>
-      {showHeader && <ResponsiveAppBar />}
-      <main className={`${styles.main} ${styles.page} ${className} page`}>
-        {children}
-      </main>
-      {showFooter && <StickyFooter />}
+      <TranslationProvider>
+        {showHeader && <ResponsiveAppBar />}
+        <main className={`${styles.main} ${styles.page} ${className} page`}>
+          {children}
+        </main>
+        {showFooter && <StickyFooter />}
+      </TranslationProvider>
     </>
   );
 }
